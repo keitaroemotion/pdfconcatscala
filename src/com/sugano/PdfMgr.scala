@@ -17,8 +17,8 @@ import java.awt.Desktop;
 class PdfMgr {
   
     
-	val DocumentDirectoryPath = "//Users//keitaroemotion//Documents//";
-	val fileName = DocumentDirectoryPath+"sample.pdf";
+	val DocumentDirectoryPath = "//Users//keitaroemotion//Pictures//";
+	val fileName = DocumentDirectoryPath+"jpedoscomedy.pdf";
 	  
 	def Execute() = {
 			try {
@@ -26,7 +26,7 @@ class PdfMgr {
 		      PdfWriter.getInstance(document, new FileOutputStream(fileName));
 		      document.setPageSize(PageSize.A4);
 		      document.open();
-		      addContent(document,DocumentDirectoryPath+"mangadata//spray","jpeg");
+		      addContent(document,DocumentDirectoryPath+"pedos","jpg");
 		      document.close();
 		      Desktop.getDesktop().open(new File(fileName));
 		    } catch{
@@ -35,7 +35,7 @@ class PdfMgr {
 	}
 
 	def ScalePercent(idealLength:Float , actualLength:Float, image:Image)={
-			image.scalePercent((idealLength/actualLength)*100)
+			image.scalePercent((idealLength/actualLength)*100f * 0.9f)
 	}
 	
 	def addContent(document:Document, dirpath:String, ext:String)={
@@ -46,6 +46,7 @@ class PdfMgr {
 		  	println("> "+f.file.toString())
 	      	var image = Image.getInstance(f.file.toString())
 		  	ScalePercent(211f , image.getWidth()/2.835f, image)
+		  	image.setIndentationLeft(-7f)
 	    	document.add(image)
 	  });
 	}
